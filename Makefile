@@ -7,8 +7,8 @@
 
 CC		:=		gcc
 NAME	:=		libgoogcrypto.so
-SRC		:=		googcrypto/googcrypto.c	\
-				googcrypto/hash_json_file_object.c
+SRC		:=		googcrypto/hasher.c		\
+				googcrypto/googcrypto.c
 # PROD
 CFLAGS	:=		-O3 -fPIC -shared
 # DEBUG
