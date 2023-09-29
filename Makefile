@@ -1,14 +1,13 @@
-##
-## EPITECH PROJECT, 2023
-## Makefile
-## File description:
-## Makefile
-##
-
 CC		:=		gcc
-NAME	:=		libgoogcrypto.so
+ifeq ($(OS),Windows_NT)
+NAME	:=		lib\\libgoogcrypto.dll
+SRC		:=		googcrypto\\hasher.c		\
+				googcrypto\\googcrypto.c
+else
+NAME	:=		lib/libgoogcrypto.so
 SRC		:=		googcrypto/hasher.c		\
 				googcrypto/googcrypto.c
+endif
 # PROD
 CFLAGS	:=		-O3 -fPIC -shared
 # DEBUG
@@ -22,13 +21,22 @@ VFLAGS	:=		--track-origins=yes --show-leak-kinds=all	\
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
+	echo $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
 clean:
+ifeq ($(OS),Windows_NT)
+	erase /q /f $(OBJ)
+else
 	rm -rf $(OBJ)
+endif
 
 fclean:	clean
+ifeq ($(OS),Windows_NT)
+	erase /q /f $(NAME)
+else
 	rm -rf $(NAME)
+endif
 
 re:	fclean	all
 
